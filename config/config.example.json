@@ -2,15 +2,15 @@
   "clientId": "YOUR_CLIENT_ID",
   "token": "YOUR_BOT_USER_TOKEN",
 
-  "language": "en",
+  "language": "it",
   "prefix": "!",
   "acceptedExtensions": [".mp3", ".wav"],
   "maximumFileSize": 1000000,
   "volume": 1.0,
-  "deleteMessages": false,
-  "stayInChannel": false,
+  "deleteMessages": true,
+  "stayInChannel": true,
   "timeout": 10,
-  "deafen": false,
-  "game": "SoundBoard",
+  "deafen": true,
+  "game": "Greg Willen non dormire",
   "elevatedRoles": ["admin"]
 }
