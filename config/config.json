@@ -5,7 +5,7 @@
 
   "language": "it",
   "prefix": "/",
-  "acceptedExtensions": [".mp3", ".wav"],
+  "acceptedExtensions": [".mp3", ".wav", ".opus"],
   "maximumFileSize": 1000000,
   "volume": 1.0,
   "deleteMessages": true,
