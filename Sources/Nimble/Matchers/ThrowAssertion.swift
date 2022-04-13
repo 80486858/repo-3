@@ -6,7 +6,7 @@ import CwlPosixPreconditionTesting
 
 public func throwAssertion<Out>() -> Predicate<Out> {
     return Predicate { actualExpression in
-    #if arch(x86_64) && canImport(Darwin)
+    #if (arch(x86_64) || arch(arm64)) && (canImport(Darwin) || canImport(Glibc))
         let message = ExpectationMessage.expectedTo("throw an assertion")
 
         var actualError: Error?
@@ -43,9 +43,12 @@ public func throwAssertion<Out>() -> Predicate<Out> {
             return PredicateResult(bool: caughtException != nil, message: message)
         }
     #else
-        fatalError("The throwAssertion Nimble matcher can only run on x86_64 platforms with " +
-            "Objective-C (e.g. macOS, iPhone 5s or later simulators). You can silence this error " +
-            "by placing the test case inside an #if arch(x86_64) or canImport(Darwin) conditional statement")
+        let message = """
+            The throwAssertion Nimble matcher can only run on x86_64 and arm64 platforms.
+            You can silence this error by placing the test case inside an #if arch(x86_64) || arch(arm64) conditional \
+            statement.
+            """
+        fatalError(message)
     #endif
     }
 }
