@@ -1,6 +1,6 @@
 /*
  * MinIO Go Library for Amazon S3 Compatible Cloud Storage
- * Copyright 2019 MinIO, Inc.
+ * Copyright 2019-2022 MinIO, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,12 +18,16 @@
 package credentials
 
 import (
+	"bytes"
 	"encoding/xml"
 	"errors"
 	"fmt"
+	"io"
 	"net/http"
 	"net/url"
+	"os"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -82,30 +86,61 @@ type STSWebIdentity struct {
 	// assuming.
 	RoleARN string
 
+	// Policy is the policy where the credentials should be limited too.
+	Policy string
+
 	// roleSessionName is the identifier for the assumed role session.
 	roleSessionName string
 }
 
 // NewSTSWebIdentity returns a pointer to a new
 // Credentials object wrapping the STSWebIdentity.
-func NewSTSWebIdentity(stsEndpoint string, getWebIDTokenExpiry func() (*WebIdentityToken, error)) (*Credentials, error) {
+func NewSTSWebIdentity(stsEndpoint string, getWebIDTokenExpiry func() (*WebIdentityToken, error), opts ...func(*STSWebIdentity)) (*Credentials, error) {
 	if stsEndpoint == "" {
 		return nil, errors.New("STS endpoint cannot be empty")
 	}
 	if getWebIDTokenExpiry == nil {
 		return nil, errors.New("Web ID token and expiry retrieval function should be defined")
 	}
-	return New(&STSWebIdentity{
+	i := &STSWebIdentity{
 		Client: &http.Client{
 			Transport: http.DefaultTransport,
 		},
 		STSEndpoint:         stsEndpoint,
 		GetWebIDTokenExpiry: getWebIDTokenExpiry,
-	}), nil
+	}
+	for _, o := range opts {
+		o(i)
+	}
+	return New(i), nil
 }
 
-func getWebIdentityCredentials(clnt *http.Client, endpoint, roleARN, roleSessionName string,
-	getWebIDTokenExpiry func() (*WebIdentityToken, error)) (AssumeRoleWithWebIdentityResponse, error) {
+// NewKubernetesIdentity returns a pointer to a new
+// Credentials object using the Kubernetes service account
+func NewKubernetesIdentity(stsEndpoint string, opts ...func(*STSWebIdentity)) (*Credentials, error) {
+	return NewSTSWebIdentity(stsEndpoint, func() (*WebIdentityToken, error) {
+		token, err := os.ReadFile("/var/run/secrets/kubernetes.io/serviceaccount/token")
+		if err != nil {
+			return nil, err
+		}
+
+		return &WebIdentityToken{
+			Token: string(token),
+		}, nil
+	}, opts...)
+}
+
+// WithPolicy option will enforce that the returned credentials
+// will be scoped down to the specified policy
+func WithPolicy(policy string) func(*STSWebIdentity) {
+	return func(i *STSWebIdentity) {
+		i.Policy = policy
+	}
+}
+
+func getWebIdentityCredentials(clnt *http.Client, endpoint, roleARN, roleSessionName string, policy string,
+	getWebIDTokenExpiry func() (*WebIdentityToken, error),
+) (AssumeRoleWithWebIdentityResponse, error) {
 	idToken, err := getWebIDTokenExpiry()
 	if err != nil {
 		return AssumeRoleWithWebIdentityResponse{}, err
@@ -129,6 +164,9 @@ func getWebIdentityCredentials(clnt *http.Client, endpoint, roleARN, roleSession
 	if idToken.Expiry > 0 {
 		v.Set("DurationSeconds", fmt.Sprintf("%d", idToken.Expiry))
 	}
+	if policy != "" {
+		v.Set("Policy", policy)
+	}
 	v.Set("Version", STSVersion)
 
 	u, err := url.Parse(endpoint)
@@ -136,12 +174,12 @@ func getWebIdentityCredentials(clnt *http.Client, endpoint, roleARN, roleSession
 		return AssumeRoleWithWebIdentityResponse{}, err
 	}
 
-	u.RawQuery = v.Encode()
-
-	req, err := http.NewRequest(http.MethodPost, u.String(), nil)
+	req, err := http.NewRequest(http.MethodPost, u.String(), strings.NewReader(v.Encode()))
 	if err != nil {
 		return AssumeRoleWithWebIdentityResponse{}, err
 	}
+
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 
 	resp, err := clnt.Do(req)
 	if err != nil {
@@ -150,7 +188,22 @@ func getWebIdentityCredentials(clnt *http.Client, endpoint, roleARN, roleSession
 
 	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusOK {
-		return AssumeRoleWithWebIdentityResponse{}, errors.New(resp.Status)
+		var errResp ErrorResponse
+		buf, err := io.ReadAll(resp.Body)
+		if err != nil {
+			return AssumeRoleWithWebIdentityResponse{}, err
+		}
+		_, err = xmlDecodeAndBody(bytes.NewReader(buf), &errResp)
+		if err != nil {
+			var s3Err Error
+			if _, err = xmlDecodeAndBody(bytes.NewReader(buf), &s3Err); err != nil {
+				return AssumeRoleWithWebIdentityResponse{}, err
+			}
+			errResp.RequestID = s3Err.RequestID
+			errResp.STSError.Code = s3Err.Code
+			errResp.STSError.Message = s3Err.Message
+		}
+		return AssumeRoleWithWebIdentityResponse{}, errResp
 	}
 
 	a := AssumeRoleWithWebIdentityResponse{}
@@ -164,7 +217,7 @@ func getWebIdentityCredentials(clnt *http.Client, endpoint, roleARN, roleSession
 // Retrieve retrieves credentials from the MinIO service.
 // Error will be returned if the request fails.
 func (m *STSWebIdentity) Retrieve() (Value, error) {
-	a, err := getWebIdentityCredentials(m.Client, m.STSEndpoint, m.RoleARN, m.roleSessionName, m.GetWebIDTokenExpiry)
+	a, err := getWebIdentityCredentials(m.Client, m.STSEndpoint, m.RoleARN, m.roleSessionName, m.Policy, m.GetWebIDTokenExpiry)
 	if err != nil {
 		return Value{}, err
 	}
@@ -176,6 +229,7 @@ func (m *STSWebIdentity) Retrieve() (Value, error) {
 		AccessKeyID:     a.Result.Credentials.AccessKey,
 		SecretAccessKey: a.Result.Credentials.SecretKey,
 		SessionToken:    a.Result.Credentials.SessionToken,
+		Expiration:      a.Result.Credentials.Expiration,
 		SignerType:      SignatureV4,
 	}, nil
 }

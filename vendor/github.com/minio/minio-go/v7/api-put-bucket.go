@@ -26,7 +26,7 @@ import (
 	"github.com/minio/minio-go/v7/pkg/s3utils"
 )
 
-/// Bucket operations
+// Bucket operations
 func (c *Client) makeBucket(ctx context.Context, bucketName string, opts MakeBucketOptions) (err error) {
 	// Validate the input arguments.
 	if err := s3utils.CheckValidBucketNameStrict(bucketName); err != nil {
@@ -42,7 +42,7 @@ func (c *Client) makeBucket(ctx context.Context, bucketName string, opts MakeBuc
 	return err
 }
 
-func (c *Client) doMakeBucket(ctx context.Context, bucketName string, location string, objectLockEnabled bool) (err error) {
+func (c *Client) doMakeBucket(ctx context.Context, bucketName, location string, objectLockEnabled bool) (err error) {
 	defer func() {
 		// Save the location into cache on a successful makeBucket response.
 		if err == nil {
