@@ -270,7 +270,7 @@ jobs:
     - continue-on-error: true
       if: always()
       name: Store lint report artifact
-      uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
+      uses: actions/upload-artifact@184d73b71b93c222403b2e7f1ffebe4508014249
       with:
         name: golangci-lint-report
         path: golangci-lint-report.xml
