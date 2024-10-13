@@ -12,7 +12,7 @@ require (
 	github.com/imdario/mergo v0.3.13
 	github.com/onsi/gomega v1.20.1
 	github.com/pkg/errors v0.9.1
-	github.com/rs/zerolog v1.29.0
+	github.com/rs/zerolog v1.33.0
 	github.com/stretchr/testify v1.8.1
 	golang.org/x/sync v0.1.0
 	k8s.io/api v0.25.11
@@ -69,7 +69,7 @@ require (
 	github.com/liggitt/tabwriter v0.0.0-20181228230101-89fcab3d43de // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
-	github.com/mattn/go-isatty v0.0.17 // indirect
+	github.com/mattn/go-isatty v0.0.19 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.2 // indirect
 	github.com/mitchellh/go-wordwrap v1.0.1 // indirect
 	github.com/moby/spdystream v0.2.0 // indirect
