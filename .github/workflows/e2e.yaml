@@ -268,7 +268,7 @@ jobs:
       uses: actions/checkout@v3
     - continue-on-error: true
       name: Build Base Image
-      uses: smartcontractkit/chainlink-github-actions/docker/build-push@ce87f8986ca18336cc5015df75916c2ec0a7c4b3
+      uses: smartcontractkit/chainlink-github-actions/docker/build-push@d2f9642bcc24a73400568756f24b72c188ac7a9a
       with:
         AWS_REGION: ${{ secrets.QA_AWS_REGION }}
         AWS_ROLE_TO_ASSUME: ${{ secrets.QA_AWS_ROLE_TO_ASSUME }}
@@ -287,7 +287,7 @@ jobs:
         '
     - continue-on-error: true
       name: Build Test Runner
-      uses: smartcontractkit/chainlink-github-actions/docker/build-push@ce87f8986ca18336cc5015df75916c2ec0a7c4b3
+      uses: smartcontractkit/chainlink-github-actions/docker/build-push@d2f9642bcc24a73400568756f24b72c188ac7a9a
       with:
         AWS_REGION: ${{ secrets.QA_AWS_REGION }}
         AWS_ROLE_TO_ASSUME: ${{ secrets.QA_AWS_ROLE_TO_ASSUME }}
@@ -565,7 +565,7 @@ jobs:
       uses: actions/checkout@v3
     - continue-on-error: true
       name: Run Remote Runner Tests
-      uses: smartcontractkit/chainlink-github-actions/chainlink-testing-framework/run-tests@ce87f8986ca18336cc5015df75916c2ec0a7c4b3
+      uses: smartcontractkit/chainlink-github-actions/chainlink-testing-framework/run-tests@d2f9642bcc24a73400568756f24b72c188ac7a9a
       with:
         QA_AWS_REGION: ${{ secrets.QA_AWS_REGION }}
         QA_AWS_ROLE_TO_ASSUME: ${{ secrets.QA_AWS_ROLE_TO_ASSUME }}
@@ -841,7 +841,7 @@ jobs:
       uses: actions/checkout@v3
     - continue-on-error: true
       name: Run Tests
-      uses: smartcontractkit/chainlink-github-actions/chainlink-testing-framework/run-tests@ce87f8986ca18336cc5015df75916c2ec0a7c4b3
+      uses: smartcontractkit/chainlink-github-actions/chainlink-testing-framework/run-tests@d2f9642bcc24a73400568756f24b72c188ac7a9a
       with:
         QA_AWS_REGION: ${{ secrets.QA_AWS_REGION }}
         QA_AWS_ROLE_TO_ASSUME: ${{ secrets.QA_AWS_ROLE_TO_ASSUME }}
