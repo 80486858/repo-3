@@ -256,7 +256,7 @@ jobs:
         go-version: ${{ matrix.go }}
     - continue-on-error: true
       name: golangci-lint
-      uses: golangci/golangci-lint-action@v4.0.0
+      uses: golangci/golangci-lint-action@v6.1.1
       with:
         args: --timeout 5m
         skip-build-cache: true
