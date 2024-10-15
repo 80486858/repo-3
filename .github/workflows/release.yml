@@ -266,7 +266,7 @@ jobs:
     - continue-on-error: true
       id: asset
       name: Retrieve the release asset
-      uses: robinraju/release-downloader@efa4cd07bd0195e6cc65e9e30c251b49ce4d3e51
+      uses: robinraju/release-downloader@a96f54c1b5f5e09e47d9504526e96febd949d4c2
       with:
         fileName: ${{ env.ASSET }}
         out-file-path: ${{ env.BIN }}
