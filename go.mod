@@ -11,7 +11,7 @@ require (
 	github.com/avast/retry-go v3.0.0+incompatible
 	github.com/aws/aws-sdk-go v1.44.333
 	github.com/beevik/etree v1.2.0
-	github.com/danieljoos/wincred v1.2.0
+	github.com/danieljoos/wincred v1.2.2
 	github.com/google/uuid v1.3.1
 	github.com/h2non/gock v1.2.0
 	github.com/keybase/go-keychain v0.0.0-20211119201326-e02f34051621
@@ -21,7 +21,7 @@ require (
 	github.com/playwright-community/playwright-go v0.3500.0
 	github.com/sirupsen/logrus v1.9.3
 	github.com/skratchdot/open-golang v0.0.0-20200116055534-eef842397966
-	github.com/stretchr/testify v1.8.4
+	github.com/stretchr/testify v1.9.0
 	github.com/tidwall/gjson v1.16.0
 	golang.org/x/net v0.14.0
 	gopkg.in/ini.v1 v1.67.0
@@ -48,12 +48,12 @@ require (
 	github.com/mgutz/ansi v0.0.0-20170206155736-9520e82c474b // indirect
 	github.com/mtibben/percent v0.2.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/stretchr/objx v0.5.0 // indirect
+	github.com/stretchr/objx v0.5.2 // indirect
 	github.com/tidwall/match v1.1.1 // indirect
 	github.com/tidwall/pretty v1.2.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/crypto v0.12.0 // indirect
-	golang.org/x/sys v0.11.0 // indirect
+	golang.org/x/sys v0.20.0 // indirect
 	golang.org/x/term v0.11.0 // indirect
 	golang.org/x/text v0.12.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
