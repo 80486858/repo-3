@@ -282,14 +282,14 @@ jobs:
     - continue-on-error: true
       if: matrix.os == 'linux'
       name: Upload artifact for linux
-      uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874
+      uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882
       with:
         name: acr-credential-provider-${{ matrix.os }}-${{ matrix.arch }}
         path: bin/azure-acr-credential-provider-${{ matrix.os }}-${{ matrix.arch }}
     - continue-on-error: true
       if: matrix.os == 'windows'
       name: Upload artifact for windows
-      uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874
+      uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882
       with:
         if-no-files-found: error
         name: acr-credential-provider-${{ matrix.os }}-${{ matrix.arch }}
@@ -575,7 +575,7 @@ jobs:
 
         '
     - continue-on-error: true
-      uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874
+      uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882
       with:
         if-no-files-found: error
         name: cloud-controller-manager-${{ matrix.os }}-${{ matrix.arch }}
@@ -875,14 +875,14 @@ jobs:
     - continue-on-error: true
       if: matrix.os == 'linux'
       name: Upload artifact for linux
-      uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874
+      uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882
       with:
         name: cloud-node-manager-${{ matrix.os }}-${{ matrix.arch }}
         path: bin/azure-cloud-node-manager-${{ matrix.os }}-${{ matrix.arch }}
     - continue-on-error: true
       if: matrix.os == 'windows'
       name: Upload artifact for windows
-      uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874
+      uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882
       with:
         if-no-files-found: error
         name: cloud-node-manager-${{ matrix.os }}-${{ matrix.arch }}
