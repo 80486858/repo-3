@@ -268,7 +268,7 @@ jobs:
       id: author_association
       if: ${{ steps.check_secret.outputs.is_CHECK_TEAM_ORG_APP_ID_set == 'true' }}
       name: Check author association
-      uses: actions/github-script@98814c53be79b1d30f795b907e553d8679345975
+      uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea
       with:
         github-token: ${{ steps.get_token.outputs.app_token }}
         script: "try {\n  const result = await github.rest.orgs.checkMembershipForUser({\n\
@@ -287,7 +287,7 @@ jobs:
     - continue-on-error: true
       if: ${{ steps.check_secret.outputs.is_CHECK_TEAM_ORG_APP_ID_set == 'true' &&
         steps.author_association.outputs.result != 'true' }}
-      uses: actions/github-script@98814c53be79b1d30f795b907e553d8679345975
+      uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea
       with:
         script: "github.rest.issues.addLabels({\n  issue_number: context.issue.number,\n\
           \  owner: context.repo.owner,\n  repo: context.repo.repo,\n  labels: [\"\
