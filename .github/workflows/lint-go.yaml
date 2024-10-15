@@ -250,7 +250,7 @@ jobs:
         sudo sh -c ''echo 1 > /proc/sys/net/ipv4/ip_forward'''
     - continue-on-error: true
       name: Install Go
-      uses: actions/setup-go@6edd4406fa81c3da01a34fa6f6343087c207a568
+      uses: actions/setup-go@0a12ed9d6a96ab950c8f026ed9f722fe0da7ef32
       with:
         go-version: 1.19.5
     - continue-on-error: true
@@ -514,7 +514,7 @@ jobs:
         sudo sh -c ''echo 1 > /proc/sys/net/ipv4/ip_forward'''
     - continue-on-error: true
       name: Install Go
-      uses: actions/setup-go@6edd4406fa81c3da01a34fa6f6343087c207a568
+      uses: actions/setup-go@0a12ed9d6a96ab950c8f026ed9f722fe0da7ef32
       with:
         go-version: 1.19.5
     - continue-on-error: true
@@ -801,7 +801,7 @@ jobs:
         sudo sh -c ''echo 1 > /proc/sys/net/ipv4/ip_forward'''
     - continue-on-error: true
       name: Install Go
-      uses: actions/setup-go@6edd4406fa81c3da01a34fa6f6343087c207a568
+      uses: actions/setup-go@0a12ed9d6a96ab950c8f026ed9f722fe0da7ef32
       with:
         go-version: 1.19.5
     - continue-on-error: true
@@ -1068,7 +1068,7 @@ jobs:
         sudo sh -c ''echo 1 > /proc/sys/net/ipv4/ip_forward'''
     - continue-on-error: true
       name: Install Go
-      uses: actions/setup-go@6edd4406fa81c3da01a34fa6f6343087c207a568
+      uses: actions/setup-go@0a12ed9d6a96ab950c8f026ed9f722fe0da7ef32
       with:
         go-version: 1.19.5
     - continue-on-error: true
@@ -1330,7 +1330,7 @@ jobs:
         sudo sh -c ''echo 1 > /proc/sys/net/ipv4/ip_forward'''
     - continue-on-error: true
       name: Install Go
-      uses: actions/setup-go@6edd4406fa81c3da01a34fa6f6343087c207a568
+      uses: actions/setup-go@0a12ed9d6a96ab950c8f026ed9f722fe0da7ef32
       with:
         go-version: 1.19.5
     - continue-on-error: true
