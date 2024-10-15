@@ -592,7 +592,7 @@ jobs:
         '
     - continue-on-error: true
       name: Login to Azure
-      uses: azure/login@92a5484dfaf04ca78a94597f4f19fea633851fa2
+      uses: azure/login@a65d910e8af852a8061c627c456678983e180302
       with:
         client-id: ${{ secrets.AZURE_PR_CLIENT_ID }}
         subscription-id: ${{ secrets.AZURE_PR_SUBSCRIPTION_ID }}
