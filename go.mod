@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/coinbase/rosetta-sdk-go/types v1.0.0
-	github.com/gorilla/mux v1.8.0
+	github.com/gorilla/mux v1.8.1
 	github.com/stretchr/testify v1.7.2
 )
 
