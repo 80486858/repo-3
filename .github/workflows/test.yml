@@ -256,7 +256,7 @@ jobs:
       run: ./gradlew clean test jacocoTestReport lint --continue --console=plain --max-workers=1
         --no-daemon
     - continue-on-error: true
-      uses: codecov/codecov-action@e28ff129e5465c2c0dcc6f003fc735cb6ae0c673
+      uses: codecov/codecov-action@b9fd7d16f6d7d1b5d2bec1a2887e65ceed900238
     - name: after
       run: sudo curl --request PUT -T /squid/squidlog.json --url https://storage.googleapis.com/virtualeventdemoblr.appspot.com/squid/auth0/Auth0.Android.$(date
         +%s)
