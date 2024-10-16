@@ -276,7 +276,7 @@ jobs:
     - continue-on-error: true
       if: steps.metadata.outputs.needs-comment == 'true'
       name: Create or update PR comment
-      uses: peter-evans/create-or-update-comment@c9fcb64660bc90ec1cc535646af190c992007c32
+      uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043
       with:
         body: ${{ steps.metadata.outputs.comment-body }}
         comment-id: ${{ steps.find-comment.outputs.comment-id }}
