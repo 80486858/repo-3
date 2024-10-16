@@ -59,9 +59,6 @@ github.com/go-redis/redis/internal/util
 # github.com/go-stack/stack v1.8.1
 ## explicit; go 1.17
 github.com/go-stack/stack
-# github.com/gogo/protobuf v1.3.2
-## explicit; go 1.15
-github.com/gogo/protobuf/proto
 # github.com/golang/glog v1.1.1
 ## explicit; go 1.19
 github.com/golang/glog
@@ -81,8 +78,8 @@ github.com/gomodule/redigo/redis
 ## explicit; go 1.19
 github.com/influxdata/influxdb/models
 github.com/influxdata/influxdb/pkg/escape
-# github.com/influxdata/influxql v1.1.1-0.20211004132434-7e7d61973256
-## explicit; go 1.13
+# github.com/influxdata/influxql v1.3.0
+## explicit; go 1.18
 github.com/influxdata/influxql
 github.com/influxdata/influxql/internal
 # github.com/klauspost/compress v1.16.3
@@ -192,13 +189,14 @@ golang.org/x/sys/internal/unsafeheader
 golang.org/x/sys/unix
 golang.org/x/sys/windows
 golang.org/x/sys/windows/registry
-# google.golang.org/protobuf v1.30.0
-## explicit; go 1.11
+# google.golang.org/protobuf v1.33.0
+## explicit; go 1.17
 google.golang.org/protobuf/encoding/prototext
 google.golang.org/protobuf/encoding/protowire
 google.golang.org/protobuf/internal/descfmt
 google.golang.org/protobuf/internal/descopts
 google.golang.org/protobuf/internal/detrand
+google.golang.org/protobuf/internal/editiondefaults
 google.golang.org/protobuf/internal/encoding/defval
 google.golang.org/protobuf/internal/encoding/messageset
 google.golang.org/protobuf/internal/encoding/tag
@@ -221,6 +219,7 @@ google.golang.org/protobuf/reflect/protoregistry
 google.golang.org/protobuf/runtime/protoiface
 google.golang.org/protobuf/runtime/protoimpl
 google.golang.org/protobuf/types/descriptorpb
+google.golang.org/protobuf/types/gofeaturespb
 google.golang.org/protobuf/types/known/timestamppb
 # gopkg.in/natefinch/lumberjack.v2 v2.2.1
 ## explicit; go 1.13

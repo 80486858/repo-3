@@ -867,13 +867,9 @@ func (p *Parser) parseDeleteStatement() (Statement, error) {
 		WalkFunc(stmt.Sources, func(n Node) {
 			if t, ok := n.(*Measurement); ok {
 				// Don't allow database or retention policy in from clause for delete
-				// statement.  They apply to the selected database across all retention
-				// policies.
+				// statement. They apply across selected database.
 				if t.Database != "" {
 					err = &ParseError{Message: "database not supported"}
-				}
-				if t.RetentionPolicy != "" {
-					err = &ParseError{Message: "retention policy not supported"}
 				}
 			}
 		})
@@ -1069,7 +1065,7 @@ func (p *Parser) parseShowMeasurementsStatement() (*ShowMeasurementsStatement, e
 			stmt.Database = lit
 		} else if tok == MUL {
 			stmt.WildcardDatabase = true
-		} else{
+		} else {
 			return nil, newParseError(tokstr(tok, lit), []string{"identifier or *"}, pos)
 		}
 
@@ -1079,7 +1075,7 @@ func (p *Parser) parseShowMeasurementsStatement() (*ShowMeasurementsStatement, e
 				stmt.RetentionPolicy = lit
 			} else if tok == MUL {
 				stmt.WildcardRetentionPolicy = true
-			} else{
+			} else {
 				return nil, newParseError(tokstr(tok, lit), []string{"identifier or *"}, pos)
 			}
 		} else {
@@ -1957,6 +1953,12 @@ func (p *Parser) parseExplainStatement() (*ExplainStatement, error) {
 
 	if tok, _, _ := p.ScanIgnoreWhitespace(); tok == ANALYZE {
 		stmt.Analyze = true
+	} else {
+		p.Unscan()
+	}
+
+	if tok, _, _ := p.ScanIgnoreWhitespace(); tok == VERBOSE {
+		stmt.Verbose = true
 	} else {
 		p.Unscan()
 	}
