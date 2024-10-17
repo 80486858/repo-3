@@ -337,7 +337,7 @@ jobs:
         path: ~/.local
     - continue-on-error: true
       name: Install Python poetry
-      uses: snok/install-poetry@v1.3
+      uses: snok/install-poetry@v1.4
       with:
         virtualenvs-create: true
         virtualenvs-in-project: true
