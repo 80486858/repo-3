@@ -276,7 +276,7 @@ jobs:
     - continue-on-error: true
       id: base_pr
       name: Create PR for BASE
-      uses: peter-evans/create-pull-request@v6
+      uses: peter-evans/create-pull-request@v7
       with:
         base: ${{ env.BASE }}
         body: 'I''ve noticed that a new tag ${{ env.TAG }} was pushed, and incremented
@@ -305,7 +305,7 @@ jobs:
     - continue-on-error: true
       id: base_x_pr
       name: Create PR for BASE_X
-      uses: peter-evans/create-pull-request@v6
+      uses: peter-evans/create-pull-request@v7
       with:
         base: ${{ env.BASE_X }}
         body: 'I''ve noticed that a new tag ${{ env.TAG }} was pushed, and added a
@@ -334,7 +334,7 @@ jobs:
     - continue-on-error: true
       id: main_pr
       name: Create PR for main
-      uses: peter-evans/create-pull-request@v6
+      uses: peter-evans/create-pull-request@v7
       with:
         base: main
         body: 'I''ve noticed that a new tag ${{ env.TAG }} was pushed, and added a
