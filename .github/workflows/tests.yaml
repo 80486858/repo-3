@@ -571,7 +571,7 @@ jobs:
     - continue-on-error: true
       if: ${{ failure() && !env.ACT }}
       name: Uploading core files
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: crash-core-linux-python-repl
         path: /tmp/cores/
@@ -579,7 +579,7 @@ jobs:
     - continue-on-error: true
       if: ${{ failure() && !env.ACT }}
       name: Uploading objdir for debugging
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: crash-objdir-linux-python-repl
         path: objdir-clone/
@@ -1030,7 +1030,7 @@ jobs:
     - continue-on-error: true
       if: ${{ failure() && !env.ACT }}
       name: Uploading core files
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: crash-core-linux-${{ matrix.build_variant }}${{ matrix.chip_tool }}
         path: /tmp/cores/
@@ -1038,7 +1038,7 @@ jobs:
     - continue-on-error: true
       if: ${{ failure() && !env.ACT }}
       name: Uploading objdir for debugging
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: crash-objdir-linux-${{ matrix.build_variant }}${{ matrix.chip_tool }}
         path: objdir-clone/

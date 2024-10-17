@@ -426,7 +426,7 @@ jobs:
     - continue-on-error: true
       if: ${{ failure() && !env.ACT }}
       name: Uploading core files
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: crash-core-linux-java-controller
         path: /tmp/cores/
@@ -434,7 +434,7 @@ jobs:
     - continue-on-error: true
       if: ${{ failure() && !env.ACT }}
       name: Uploading objdir for debugging
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: crash-objdir-linux-java-controller
         path: objdir-clone/
