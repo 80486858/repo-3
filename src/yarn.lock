@@ -1578,10 +1578,10 @@ ethereum-cryptography@^0.1.3:
     secp256k1 "^4.0.1"
     setimmediate "^1.0.5"
 
-ethereum-multicall@^2.16.1:
-  version "2.21.0"
-  resolved "https://registry.yarnpkg.com/ethereum-multicall/-/ethereum-multicall-2.21.0.tgz#a0dc5d5e7bbddabd484a75037ecb9b77ad5688ba"
-  integrity sha512-J234OuvUheTKvZVhMk41SwyB66m+MU+Xe2FFWOln8xu6TXKzOzsjSFQn/f5OTDGEiRStKMnJpCvQDim+Uk+qBQ==
+ethereum-multicall@^2.26.0:
+  version "2.26.0"
+  resolved "https://registry.yarnpkg.com/ethereum-multicall/-/ethereum-multicall-2.26.0.tgz#92fe9efb6ed1cbccc2baa757a91e4d2287d56ccb"
+  integrity sha512-7PslfFiHPUrA0zQpMgZdftUBNyVWuHVBwnRtDOr6Eam8O/OwucqP+OHZZDE7qdrWzi4Jrji8IMw2ZUFv/wbs8Q==
   dependencies:
     "@ethersproject/providers" "^5.0.10"
     ethers "^5.0.15"
