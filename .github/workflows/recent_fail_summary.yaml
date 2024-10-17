@@ -267,7 +267,7 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
     - continue-on-error: true
       name: Upload Logs
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: workflow-fail-summary
         path: 'fail_run_list.json
